@@ -1,32 +1,19 @@
+require('dotenv').config()
 const express = require("express");// common js
 const app = express();// app express
-const port = 8080; // port => hardcode
 const viewEngine = require("./config/viewEngine"); // import config 
 const webRouter = require("./routers/web"); // router
-// get the client
-const mysql = require('mysql2');
-// create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3307, 
-  // if not null default 3306
-  user: 'root', // empty
-  password:'123456',
-  database: 'DataLearn',
-});
+const connection = require("./config/database");
+const port = process.env.PORT ||8888; //port => hardcode • uat • prod
+const hostname = process. env.HOST_NAME;
+
 
 connection.query(
-  'SELECT * FROM Users u',
+  'SELECT * FROM Users',
   function(err, results, fields) {
-    console.log(results); // results contains rows returned by server
-    console.log(fields); // fields contains extra meta data about results, if available
+    console.log(results); 
   }
 );
-
-
-
-
-
 
 viewEngine(app)
 app.use(webRouter);

@@ -1,5 +1,13 @@
+const connection = require("../config/database");
+
 const getHomePage = (req, res) => {
-  res.send("Hello World!");
+  let users = [];
+
+  connection.query("SELECT * FROM Users", function (err, results, fields) {
+    users = results;
+    console.log("User", users);
+    res.send(JSON.stringify(users));
+  });
 };
 
 const getExample = (req, res) => {
@@ -10,6 +18,3 @@ module.exports = {
   getHomePage,
   getExample,
 };
-
-// export many variable
-    

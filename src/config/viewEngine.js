@@ -1,4 +1,5 @@
 const path = require("path");// common js
+const connection = require("../config/database");
 
 
 const viewEngine = (app) =>{
