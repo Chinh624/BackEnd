@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getHomePage, getExample } = require("../controllers/homeControllers"); // import file controllers
+const { getHomePage, getExample,createUser} = require("../controllers/homeControllers"); // import file controllers
 
-router.get("/test", getHomePage);
+router.get("/home", getHomePage);
 router.get("/example", getExample);
+router.post("/create-user",createUser)
+
+
 
 module.exports = router;

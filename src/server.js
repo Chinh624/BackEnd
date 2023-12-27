@@ -15,6 +15,9 @@ connection.query(
   }
 );
 
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+
 viewEngine(app)
 app.use(webRouter);
 
