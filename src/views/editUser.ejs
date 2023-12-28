@@ -109,14 +109,16 @@
         </div>
     </nav>
     <h1 style="text-align: center;">Edit user</h1>
-
-    <form action="/create" method="post">
+    <form action="/edit-user" method="post">
         <div class="container">
+            <label for="userId"><b>User ID</b></label>
+            <input type="text" name="userId" placeholder="User ID" value="<%= userEdit.id %>">
+
             <label for="userName"><b>Username</b></label>
-            <input type="text" name="userName" placeholder="Username">
+            <input type="text" name="userName" placeholder="Username" value="<%= userEdit.userName %>">
 
             <label for="passWord"><b>Password</b></label>
-            <input type="password" name="passWord" placeholder="Password">
+            <input type="password" name="passWord" placeholder="Password" value="<%= userEdit.passWord %>">
             <button type="submit">Edit User</button>
         </div>
     </form>

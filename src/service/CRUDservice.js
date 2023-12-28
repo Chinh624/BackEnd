@@ -4,6 +4,7 @@ const getAllUsers = async () =>{
     return results
 }
 
+
 module.exports ={
     getAllUsers
 }
