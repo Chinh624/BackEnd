@@ -1,27 +1,29 @@
 require('dotenv').config()
-const express = require("express");// common js
-const app = express();// app express
-const viewEngine = require("./config/viewEngine"); // import config 
-const webRouter = require("./routers/web"); // router
+const express = require("express");
+const app = express();
+const viewEngine = require("./config/viewEngine");
+const webRouter = require("./routers/web");
 const connection = require("./config/database");
-const port = process.env.PORT ||8888; //port => hardcode • uat • prod
-const hostname = process. env.HOST_NAME;
 
+// Ensure environment variables are set
+const port = process.env.PORT || 8888;
+const hostname = process.env.HOST_NAME || 'localhost';
 
-connection.query(
-  'SELECT * FROM Users',
-  function(err, results, fields) {
-    console.log(results); 
-  }
-);
+if (!hostname) {
+    throw new Error("HOST_NAME environment variable is not set.");
+}
 
-app.use(express.json()); // Used to parse JSON bodies
-app.use(express.urlencoded()); //Parse URL-encoded bodies
-
-viewEngine(app)
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
+viewEngine(app);
 app.use(webRouter);
 
-
-app.listen(port, () => {
-  console.log(`Server web ${port}`);
+// Sample route for database query
+app.get('/', async (req, res) => {
+        const [results, fields] = await connection.query('SELECT * FROM Users');
+        console.log(results)
+})
+// Start the server
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
