@@ -14,10 +14,9 @@ router.get("/home", getHomePage);
 router.get("/create-user", createUser);
 router.get("/list-user", listUsers);
 router.get("/editUser/:id", editUser);
-router.get("/deleteUser", deleteUser);
+router.post("/delete-user/:id", deleteUser);
 router.post("/create", saveUser);
 router.post("/edit-user",updateUser)
-
 
 
 module.exports = router;
